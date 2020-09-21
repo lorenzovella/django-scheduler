@@ -19,6 +19,7 @@ freq_dict_order = {
     "YEARLY": 0,
     "MONTHLY": 1,
     "WEEKLY": 2,
+    "BYWEEKLY": 2,
     "DAILY": 3,
     "HOURLY": 4,
     "MINUTELY": 5,
@@ -183,6 +184,7 @@ class Event(models.Model):
             return
         params = self._event_params()
         frequency = self.rule.rrule_frequency()
+        interval = self.rule.rrule_interval()
         if timezone.is_naive(self.start):
             dtstart = self.start
         else:
@@ -197,7 +199,7 @@ class Event(models.Model):
                 self.end_recurring_period.astimezone(tzinfo)
             ).replace(tzinfo=None)
 
-        return rrule.rrule(frequency, dtstart=dtstart, until=until, **params)
+        return rrule.rrule(frequency, dtstart=dtstart, interval=interval, until=until, **params)
 
     def _create_occurrence(self, start, end=None):
         if end is None:

@@ -21,6 +21,7 @@ freqs = (
     ("YEARLY", _("Yearly")),
     ("MONTHLY", _("Monthly")),
     ("WEEKLY", _("Weekly")),
+    ("BYWEEKLY", _("ByWeekly")),
     ("DAILY", _("Daily")),
     ("HOURLY", _("Hourly")),
     ("MINUTELY", _("Minutely")),
@@ -74,10 +75,24 @@ class Rule(models.Model):
             "DAILY": DAILY,
             "MONTHLY": MONTHLY,
             "WEEKLY": WEEKLY,
+            "BYWEEKLY": WEEKLY,
             "YEARLY": YEARLY,
             "HOURLY": HOURLY,
             "MINUTELY": MINUTELY,
             "SECONDLY": SECONDLY,
+        }
+        return compatibility_dict[self.frequency]
+
+    def rrule_interval(self):
+        compatibility_dict = {
+            "DAILY": 1,
+            "MONTHLY": 1,
+            "WEEKLY": 1,
+            "BYWEEKLY": 2,
+            "YEARLY": 1,
+            "HOURLY": 1,
+            "MINUTELY": 1,
+            "SECONDLY": 1,
         }
         return compatibility_dict[self.frequency]
 
