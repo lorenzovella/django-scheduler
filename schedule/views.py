@@ -350,7 +350,7 @@ def _api_occurrences(start, end, calendar_slug, timezone):
 
         def convert(ddatetime):
             if ddatetime:
-                ddatetime = ddatetime.split(" ")[0]
+                ddatetime = ddatetime.replace('T', ' ').split(' ')[0]
                 try:
                     return datetime.datetime.strptime(ddatetime, "%Y-%m-%d")
                 except ValueError:
