@@ -87,6 +87,7 @@ class Event(models.Model):
         Calendar, on_delete=models.CASCADE, verbose_name=_("calendar")
     )
     color_event = models.CharField(_("Color event"), blank=True, max_length=10)
+    url = models.CharField(_("Event url"), blank=True, max_length=200)
     objects = EventManager()
 
     class Meta:
