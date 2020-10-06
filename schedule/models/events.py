@@ -20,6 +20,7 @@ freq_dict_order = {
     "MONTHLY": 1,
     "WEEKLY": 2,
     "BYWEEKLY": 2,
+    "FOURWEEKLY": 2,
     "DAILY": 3,
     "HOURLY": 4,
     "MINUTELY": 5,
